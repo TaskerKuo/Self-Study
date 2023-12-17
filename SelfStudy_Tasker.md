@@ -246,5 +246,5 @@ gnuplot script.gp
 
 - 簡單練習MFC，試著做出一個薪資計算的介面。
 
-<img src="./IMG/MFC.png" style="zoom:38%;" />
+<img src="./IMG/MFC1.png" style="zoom:38%;" />
 
