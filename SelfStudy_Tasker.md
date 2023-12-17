@@ -6,7 +6,6 @@
 >
 > Description : 學習觸控的原理和Linux Kernel，TODO的代表還需要去做部分。
 
-[toc]
 
 ## 電容式觸控
 
