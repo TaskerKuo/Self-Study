@@ -6,7 +6,6 @@
 >
 > Description : 學習觸控的原理和Linux Kernel，TODO的代表還需要去做部分。
 
-[toc]
 
 ## 電容式觸控
 
@@ -89,6 +88,22 @@
 |   Jitter    | Nonlinear filter that limits current input  based on previous input. | Noise from thick overlay (SNR < 5:1),  especially useful for slider centroid data. |
 | Event-Based | Nonlinear filter that causes a predefined  response to a pattern observed in the  sensor data. | Commonly used to block generation or  posting of nonexistent events. |
 | Rule-Based  | Nonlinear filter that causes a predefined  response to a pattern observed in the  sensor data. | Commonly used during normal operation of  the touch surface to respond to special  scenarios such as accidental multi-button  selection. |
+
+### Filter Implement
+
+[Code](./SRC/Filter.m)
+
+- FIR filter
+- 有delay，需要補償(TODO)
+
+<center class = "half">
+    <img src="./IMG/FIR_bf.png" style="zoom:90%;" width = "400"/>
+    <img src="./IMG/FIR_af.png" style="zoom:90%;" width = "400"/>
+</center>
+
+- IIR filter
+
+  <img src="./IMG/IIR.png" style="zoom:30%;" />
 
 ## Linux Kernel
 
@@ -242,9 +257,8 @@ gnuplot script.gp
 
 - introduction : MFC (Microsoft Foundation Classes) 是一個用於開發 Windows 應用程式的 C++ 框架。它是由 Microsoft 提供的一組類別庫，目的是簡化 Windows 應用程式的開發。
 - follow up : 嘗試能不能在VSCode上開發，MFC與[WPF](https://en.wikipedia.org/wiki/Windows_Presentation_Foundation)的比較。
-- [大學做過的WPF](./WinFormWPF.md)
-
+- [大學做過的WPF](https://github.com/TaskerKuo/Self-Study/blob/main/WinFormWPF.md)
 - 簡單練習MFC，試著做出一個薪資計算的介面。
 
-<img src="./IMG/MFC.png" style="zoom:38%;" />
+<img src="./IMG/MFC1.png" style="zoom:38%;" />
 
