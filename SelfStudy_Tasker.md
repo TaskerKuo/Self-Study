@@ -56,7 +56,7 @@
 
 <img src="./IMG/dropcount.png" style="zoom:38%;" />
 
-- 解決方法 : (TODO)屏蔽電極被以與感應器切換信號相同的電壓驅動，因此水滴落在觸控表面上時增加的電容將被抵銷。
+- 解決方法 : 屏蔽電極被以與感應器切換信號相同的電壓驅動，因此水滴落在觸控表面上時增加的電容將被抵銷。
 
 #### EFT(Electrical Fast Transient) noise
 
@@ -97,13 +97,14 @@
 - 有delay，需要補償(TODO)
 
 <center class = "half">
-    <img src="./IMG/FIR_bf.png" style="zoom:90%;" width = "400"/>
-    <img src="./IMG/FIR_af.png" style="zoom:90%;" width = "400"/>
+    <img src="./IMG/FIR_bf.png" style="zoom:100%;" width = "350"/>
+    <img src="./IMG/FIR_af.png" style="zoom:100%;" width = "350"/>
 </center>
+
 
 - IIR filter
 
-  <img src="./IMG/IIR.png" style="zoom:30%;" />
+  <img src="./IMG/IIR.png" style="zoom:20%;" />
 
 ## Linux Kernel
 
@@ -128,7 +129,7 @@ uint16_t value = *(uint8_t *) ptr | ((*(uint8_t *) (ptr + 1)) << 8);
 int main() {
     float sum = 0.0f;
     for (int i = 0; i < 10000; i++) sum += i + 1;
-    printf("Sum: %f\n", sum); /* expect 50005000 but get 50002896.000000
+    printf("Sum: %f\n", sum); /* expect 50005000 but get 50002896.000000 */
     return 0;
 }
 ```
@@ -148,6 +149,61 @@ int main() {
 }
 ```
 
+- Macro
+
+> 檢查queue的個數是否為0
+
+```C
+#define FAIL_ON_NULL(q) \
+	if(!q)
+		return 0;
+```
+
+> 可能會發生[Dangling else]([Dangling else - Wikipedia](https://en.wikipedia.org/wiki/Dangling_else))，也就是下面的else會找近的if(p)配對。
+
+```c
+FAIL_ON_NULL(q);
+	if(p)
+else ... 
+```
+
+> Macro需加入do...while(0)
+
+```C
+#define FAIL_ON_NULL(q) \
+	do{                 \
+        if(!q)          \
+            return 0;   \
+    }while(0)
+```
+
+### Coding Style
+
+> 要與他人合作完成程式，需要遵守特定Coding Style
+
+- clang-format : 可以自動格式化程式碼，使其符合指定的程式碼風格。
+- 指令
+
+```bash
+clang-format -style=file:CodeStyle.clang-format -i <XXX.c>
+```
+
+- Coding Style設定(CodeStyle.clang-format)
+
+```bash
+BasedOnStyle: Chromium
+Language: Cpp
+MaxEmptyLinesToKeep: 3
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+DerivePointerAlignment: false
+PointerAlignment: Right
+TabWidth: 4
+UseTab: Never
+IndentWidth: 4
+BreakBeforeBraces: Linux
+AccessModifierOffset: -4
+```
 
 ### GNUPLOT
 
@@ -247,11 +303,19 @@ gnuplot script.gp
 
 ### Protocol in Linux Kernel
 
-- 圖片是ST1615的示意圖，裡面有$I^2C$的通訊協定，可以看[Linux Kernel document中的內容](https://www.kernel.org/doc/html/latest/i2c/index.html)(TODO)
+- 圖片是ST1615的示意圖，裡面有$I^2C$的通訊協定，可以看[Linux Kernel document中的內容](https://www.kernel.org/doc/html/latest/i2c/index.html)
 
 <img src="./IMG/ST1615.png" style="zoom:67%;" />
 
 - [12. N-Trig touchscreen Driver — The Linux Kernel documentation](https://docs.kernel.org/input/devices/ntrig.html)(TODO)
+
+### Assembly language
+
+> TODO
+
+### C model
+
+> TODO
 
 ## MFC (C++)
 
